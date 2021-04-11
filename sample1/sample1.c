@@ -9,7 +9,7 @@ int main(int argc, char *argv[])
     int amountA = 5;
 
     int priceB = 200;
-    int amountB = 10;
+    int amountB = 3;
     
     int summary = 0;
 
