@@ -5,5 +5,9 @@
 
 int main(int argc, char *argv[])
 {
-	printf("Hello World");
+	int price = 100;
+	int amount = 5;
+
+	printf("小計 %d * %d = %d\n", price, amount, price * amount);
+	printf("合計 %d", (int)(price * amount * 1.08f));
 }
