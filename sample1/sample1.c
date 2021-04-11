@@ -21,6 +21,13 @@ int main(int argc, char *argv[])
     printf("合計 %d", (int)(summary * 1.08f));
 }
 
+/**
+* 小計の計算と表示
+* name   品名
+* price  単価
+* amount 数量
+* 戻り値 小計金額
+**/
 int calcItemPrice(char* name, int price, int amount)
 {
     int summary = price * amount;
