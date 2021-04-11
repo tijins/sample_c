@@ -4,6 +4,9 @@
 #include<stdio.h>
 
 int calcItemPrice(char *name, int price, int amount);
+void printSummary(int price);
+
+const double TAX = 1.08f;
 
 int main(int argc, char *argv[])
 {
@@ -18,7 +21,7 @@ int main(int argc, char *argv[])
     summary += calcItemPrice("A", priceA, amountA);
     summary += calcItemPrice("B", priceB, amountB);
 
-    printf("合計 %d", (int)(summary * 1.08f));
+    printSummary(summary);
 }
 
 /**
@@ -34,4 +37,13 @@ int calcItemPrice(char* name, int price, int amount)
     printf("小計(%s) %5d * %5d = %5d\n", name, price, amount, summary);
 
     return summary;
+}
+
+/**
+* 合計を表示
+* summary 合計
+**/
+void printSummary(int summary)
+{
+    printf("合計 %d\n",  (int)(summary * TAX));
 }
