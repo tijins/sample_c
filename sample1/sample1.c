@@ -3,6 +3,8 @@
 
 #include<stdio.h>
 
+int calcItemPrice(char *name, int price, int amount);
+
 int main(int argc, char *argv[])
 {
     int priceA = 100;
@@ -13,11 +15,16 @@ int main(int argc, char *argv[])
     
     int summary = 0;
 
-    printf("小計(A) %d * %d = %d\n", priceA, amountA, priceA * amountA);
-    summary += priceA * amountA;
-
-    printf("小計(B) %d * %d = %d\n", priceB, amountB, priceB * amountB);
-    summary += priceB * amountB;
+    summary += calcItemPrice("A", priceA, amountA);
+    summary += calcItemPrice("B", priceB, amountB);
 
     printf("合計 %d", (int)(summary * 1.08f));
+}
+
+int calcItemPrice(char* name, int price, int amount)
+{
+    int summary = price * amount;
+    printf("小計(%s) %5d * %5d = %5d\n", name, price, amount, summary);
+
+    return summary;
 }
