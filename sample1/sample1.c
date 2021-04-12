@@ -3,7 +3,7 @@
 
 #include<stdio.h>
 
-int calcItemPrice(char *name, int price, int amount);
+void calcItemPrice(char* name, int price, int amount, float tax, int* excludeTax, int* includeTax);
 void printSummary(int price);
 
 const double TAX = 1.08f;
@@ -17,9 +17,13 @@ int main(int argc, char *argv[])
     int amountB = 3;
     
     int summary = 0;
+    
+    int etax, itax;
+    calcItemPrice("A", priceA, amountA, 0.08f, &etax, &itax);
+    summary += itax;
 
-    summary += calcItemPrice("A", priceA, amountA);
-    summary += calcItemPrice("B", priceB, amountB);
+    calcItemPrice("B", priceA, amountB, 0.10f, &etax, &itax);
+    summary += itax;
 
     printSummary(summary);
 }
@@ -29,14 +33,15 @@ int main(int argc, char *argv[])
 * name   品名
 * price  単価
 * amount 数量
-* 戻り値 小計金額
+* tax 消費税
+* [out] excluteTax 税抜の小計
+* [out] includeTax 税込の小計
 **/
-int calcItemPrice(char* name, int price, int amount)
+void calcItemPrice(char* name, int price, int amount, float tax, int *excludeTax, int *includeTax)
 {
-    int summary = price * amount;
-    printf("小計(%s) %5d * %5d = %5d\n", name, price, amount, summary);
-
-    return summary;
+    *excludeTax = price * amount;
+    *includeTax = *excludeTax +  *excludeTax * tax;
+    printf("小計(%s) %5d * %2d 税率:%.2f 税抜:%5d 税込:%5d\n", name, price, amount, tax, *excludeTax, *includeTax);
 }
 
 /**
@@ -45,5 +50,5 @@ int calcItemPrice(char* name, int price, int amount)
 **/
 void printSummary(int summary)
 {
-    printf("合計 %d\n",  (int)(summary * TAX));
+    printf("合計 %d\n",  summary);
 }
