@@ -24,7 +24,7 @@ int main(int argc, char *argv[])
 		scanf_s("%s", nameTemp, sizeof(nameTemp));
 
 		printf("age ?>");
-		scanf_s("%d", &ageTemp, sizeof(ageTemp));
+		scanf_s("%d", &ageTemp);
 
 		printf("finish (Y=end) ?>");
 		scanf_s("%s", lastTemp, sizeof(lastTemp));
