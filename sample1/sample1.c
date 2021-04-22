@@ -6,24 +6,44 @@
 
 #include "person.h"
 
+#define MEMBER_MAX 3
+
 int main(int argc, char *argv[])
 {
-	struct Person yamada;
-	struct Person tanaka;
+	struct Person members[MEMBER_MAX];
+	char nameTemp[sizeof(members[0].name)];
+	char lastTemp[2];
+	int ageTemp;
+	int count = 0;
+	int i;
 
-	memset(&yamada, 0, sizeof(yamada));
-	
-	// strncpyは非推奨なので、コンパイラのエラーを無効にしています
-	#pragma warning(suppress : 4996) 
-	strncpy(yamada.name, "Yamada Taro", sizeof(yamada.name));
-	yamada.age = 20;
+	while (count < MEMBER_MAX)
+	{
 
+		printf("name ?>");
+		scanf_s("%s", nameTemp, sizeof(nameTemp));
 
-	memset(&tanaka, 0, sizeof(tanaka));
-	strncpy_s(tanaka.name, sizeof(tanaka.name), "Tanaka Jiro", sizeof("Tanaka Jiro"));
-	tanaka.age = 10;
+		printf("age ?>");
+		scanf_s("%d", &ageTemp, sizeof(ageTemp));
 
-	printf("name=%s age=%d \n", yamada.name, yamada.age);
-	printf("name=%s age=%d \n", tanaka.name, tanaka.age);
+		printf("finish (Y=end) ?>");
+		scanf_s("%s", lastTemp, sizeof(lastTemp));
+
+		memset(&members[count], 0, sizeof(members[count]));
+		strncpy_s(members[count].name, sizeof(members[count].name), nameTemp, sizeof(nameTemp));
+		members[count].age = ageTemp;
+		
+		count++;
+
+		// 途中で終わる
+		if (lastTemp[0] == 'Y') {
+			break;
+		}
+	}
+
+	for (i = 0; i < count; i++)
+	{
+		printf("name=%s age=%d \n", members[i].name, members[i].age);
+	}
 
 }
